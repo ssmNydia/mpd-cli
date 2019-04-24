@@ -7,7 +7,7 @@ cli.setup({
   help: [
     '',
     '  Examples:',
-    cli.chalk.gray('    # 初始化 MPD 项目'),
+    cli.tip('    # 初始化 mpd 项目'),
     '    $ mpd init'
   ].join('\n')
 })

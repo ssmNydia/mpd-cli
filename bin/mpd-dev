@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+const fs = require('fs')
+const path = require('path')
+const util = require('../lib/util')
+const cli = require('../lib/cli')
+const dev = require('../lib/dev')
+
+cli.info('正在初始化...')
+
+cli.setup({
+  noArgs: true,
+  options: [
+    ['-p, --port <n>', '启动端口号', parseInt],
+    ['-d, --dir <value>', '项目文件夹路径'],
+    ['-l, --livereload', '启用调试自动刷新'],
+    ['-s, --static <value>', '静态资源 publicPath'],
+    ['-o, --autoopen <value>', '自动打开网页'],
+    ['-r, --proxy <value>', '启用代理'],
+    ['-m, --mobile', '启用web、H5同步开发模式'],
+    ['-rc, --routerconfig <value>', 'mpd-cli 配置路由文件路径'],
+    ['-c, --config <value>', 'mpd-cli 配置文件路径']
+  ],
+  help: [
+    '',
+    '  Examples:',
+    cli.chalk.gray('    # 启动MPD调试服务器'),
+    '    $ mpd dev'
+  ].join('\n')
+})
+
+const cfpath = path.resolve(process.cwd(), cli.program.config || 'mpd.config.js')
+const rpath = path.resolve(process.cwd(), cli.program.routerconfig || 'router.js')
+let defconf = {}
+
+if(fs.existsSync(cfpath)){
+  defconf = require(cfpath)
+}
+
+const conf = Object.assign(
+  defconf.dev || {},
+  util.subObject(cli.program,['port','dir','livereload','static','autoopen','proxy','mobile']),
+  {cliConfPath: cfpath, cliRtPath: rpath}
+)
+
+dev(conf)
+
