@@ -37,7 +37,9 @@ if(fs.existsSync(cfpath)){
 }
 
 const conf = Object.assign(
+  defconf.isH5 || {isH5: false},
   defconf.dev || {},
+  defconf.plugins || {},
   util.subObject(cli.program,['port','dir','livereload','static','autoopen','proxy','mobile']),
   {cliConfPath: cfpath, cliRtPath: rpath}
 )
