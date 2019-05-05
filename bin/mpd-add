@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+const fs = require('fs')
+const path = require('path')
+const cli = require('../lib/cli')
+const add = require('../lib/add')
+
+const args = cli.setup({
+  usage: '<name>',
+  options: [
+    ['-p, --page', '添加页面'],
+    ['-c, --component', '添加组件'],
+    ['-r, --rename', '重命名 需要配合 -p 或 -c'],
+    ['-f, --force', '强制覆盖']
+  ],
+  help: [
+    '',
+    '  Examples:',
+    cli.chalk.gray('    # 新增 mpd 组件'),
+    '    $ mpd add -c demo',
+    cli.chalk.gray('    # 新增 mpd 页面'),
+    '    $ mpd add -p demo',
+    cli.chalk.gray('    # 重命名 mpd 页面 demo为test'),
+    '    $ mpd add -p -r demo test',
+    cli.chalk.gray('    # 新增 mpd 组件，强制覆盖同名组件'),
+    '    $ mpd add -c -f demo',
+    ''
+  ].join('\n')
+})
+
+if (!(fs.existsSync(path.resolve('pages'))&&fs.existsSync(path.resolve('components')))) {
+  cli.warn('请在项目根目录执行 mpd add 命令')
+  return
+}
+
+add({
+  name: args[0],
+  options: cli.program
+})

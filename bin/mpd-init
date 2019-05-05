@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+const cli = require('../lib/cli')
+const init = require('../lib/init')
+
+cli.setup({
+  noArgs: true,
+  help: [
+    '',
+    '  Examples:',
+    cli.tip('    # 初始化 mpd 项目'),
+    '    $ mpd init'
+  ].join('\n')
+})
+
+init()

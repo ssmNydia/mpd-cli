@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+const fs = require('fs')
+const path = require('path')
+const util = require('../lib/util')
+const cli = require('../lib/cli')
+const build = require('../lib/build')
+
+cli.info('正在初始化...')
+
+cli.setup({
+  noArgs: true,
+  options: [
+    ['-s, --static <value>', '静态资源 publicPath'],
+    ['-d, --dir <value>', '项目文件夹路径'],
+    ['-o, --output <value>', '编译代码输出路径'],
+    ['-c, --clean', '构建前先清空输出目录'],
+    ['-p, --publicPath <value>', '公开的资源URL前缀路径'],
+    ['-u, --publicUrl <value>', '公开的访问URL']
+  ],
+  help: [
+    '',
+    '  Examples:',
+    cli.chalk.gray('    # 打包编译'),
+    '    $ mpd build'
+  ].join('\n')
+})
+
+const cfpath = path.resolve(process.cwd(), cli.program.config || 'mpd.config.js')
+const rpath = path.resolve(process.cwd(), cli.program.routerconfig || 'router.js')
+let defconf = {}
+
+if(fs.existsSync(cfpath)){
+  defconf = require(cfpath)
+}
+
+const conf = Object.assign(
+  defconf.isH5 || {isH5: false},
+  defconf.build || {},
+  defconf.plugins || {},
+  util.subObject(cli.program,['static', 'dir', 'output', 'clean', 'publicPath', 'publicUrl','openMinify']),
+  {cliConfPath: cfpath, cliRtPath: rpath}
+)
+
+build(conf)
+.catch(() => {
+  process.exit(1)
+})
