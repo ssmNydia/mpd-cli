@@ -15,8 +15,8 @@ cli.setup({
     ['-l, --livereload', '启用调试自动刷新'],
     ['-s, --static <value>', '静态资源 publicPath'],
     ['-o, --autoopen <value>', '自动打开网页'],
-    ['-r, --proxy <value>', '启用代理'],
     ['-m, --mobile', '启用web、H5同步开发模式'],
+    ['-op, --openProxy', '启用代理'],
     ['-rc, --routerconfig <value>', 'mpd-cli 配置路由文件路径'],
     ['-c, --config <value>', 'mpd-cli 配置文件路径']
   ],
@@ -40,7 +40,7 @@ const conf = Object.assign(
   defconf.isH5 || {isH5: false},
   defconf.dev || {},
   defconf.plugins || {},
-  util.subObject(cli.program,['port','dir','livereload','static','autoopen','proxy','mobile']),
+  util.subObject(cli.program,['port','dir','livereload','static','autoopen','mobile','openProxy']),
   {cliConfPath: cfpath, cliRtPath: rpath}
 )
 
