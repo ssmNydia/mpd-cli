@@ -1,15 +1,12 @@
 {
   "name": "mpd-cli",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "CLI for mpd",
   "preferGlobal": true,
   "bin": {
     "mpd": "bin/mpd"
   },
-  "scripts": {
-    "test": "mocha test/**/*.spec.js",
-    "lint": "eslint lib"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ssmNydia/mpd-cli.git"
