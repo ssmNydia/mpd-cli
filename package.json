@@ -31,9 +31,9 @@
   "dependencies": {
     "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-function-bind": "^7.2.0",
-    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.3",
-    "@babel/runtime": "^7.4.3",
+    "@babel/runtime": "^7.4.5",
     "async": "^2.6.2",
     "autoprefixer": "^9.5.1",
     "babel-eslint": "^10.0.1",
@@ -59,6 +59,7 @@
     "inquirer": "^6.3.1",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
+    "koa-server-http-proxy": "^0.1.0",
     "koa-static": "^5.0.0",
     "koa-webpack": "^5.2.2",
     "koa2-cors": "^2.0.6",
@@ -77,5 +78,6 @@
     "user-home": "^2.0.0",
     "webpack": "^4.30.0",
     "webpack-dev-middleware": "3.6.0"
-  }
+  },
+  "devDependencies": {}
 }
