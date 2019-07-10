@@ -10,7 +10,8 @@ const args = cli.setup({
     ['-p, --page', '添加页面'],
     ['-c, --component', '添加组件'],
     ['-r, --rename', '重命名 需要配合 -p 或 -c'],
-    ['-f, --force', '强制覆盖']
+    ['-f, --force', '强制覆盖'],
+    ['-d, --download', '下载最新模版']
   ],
   help: [
     '',
