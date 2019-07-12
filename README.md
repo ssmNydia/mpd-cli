@@ -35,6 +35,9 @@ $ mpd add -p -r index demo
 
 # 使用 -f 可以强制覆盖同名页面
 $ mpd add -p -f index
+
+# 使用 -d 下载最新模版添加页面
+$ mpd add -p -d index
 ```
 
 启动调试服务器，在项目根目录运行
