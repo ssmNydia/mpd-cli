@@ -19,6 +19,8 @@ $ npm i -g mpd-cli
 $ mpd init
 ```
 
+进入项目后，执行 `npm i`
+
 新增页面或组件
 
 在项目根目录下运行 `mpd init`
