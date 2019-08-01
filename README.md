@@ -15,6 +15,8 @@ $ npm i -g mpd-cli
 
 创建项目
 
+在项目根目录下运行 `mpd init`
+
 ``` bash
 $ mpd init
 ```
@@ -22,8 +24,6 @@ $ mpd init
 进入项目后，执行 `npm i`
 
 新增页面或组件
-
-在项目根目录下运行 `mpd init`
 
 ``` bash
 # 使用 -p 添加名为 demo的页面
