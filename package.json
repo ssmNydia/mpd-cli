@@ -1,6 +1,6 @@
 {
   "name": "mpd-cli",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "CLI for mpd",
   "preferGlobal": true,
   "bin": {

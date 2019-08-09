@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+const fs = require('fs')
+const path = require('path')
+const util = require('../lib/util')
+const cli = require('../lib/cli')
+
+// 静态网站打包
