@@ -11,13 +11,13 @@
 $ npm i -g mpd-cli
 ```
 
+安装完成后，可以在命令行中运行 `mpd` 命令，看看是否展示出一份可用命令的帮助信息，来验证它是否安装成功。
+
 ## 使用说明
 
 ### 创建项目
 
-在项目根目录下运行 `mpd init`
-
-按提示完成创建；
+运行 `mpd init`，按提示完成创建；
 
 进入项目后，执行 `npm i`
 
@@ -36,7 +36,7 @@ $ mpd add -p demo
 # 使用 -c 添加名为 test的组件
 $ mpd add -c test
 
-# 使用 -r 可以对已有页面进行重命名
+# 使用 -r 可以对已有页面进行重命名 将index 改为 demo
 $ mpd add -p -r index demo
 
 # 使用 -f 可以强制覆盖同名页面
@@ -46,21 +46,72 @@ $ mpd add -p -f index
 $ mpd add -p -d index
 ```
 
-启动调试服务器，在项目根目录运行
+### 启动调试服务器，在项目根目录运行
 
 ``` bash
 $ mpd dev
 ```
 
-构建打包项目，在项目根目录运行
+### 构建打包项目，在项目根目录运行
 
 ``` bash
 $ mpd build
 ```
 
+当出现编译失败时，请根据错误提示，修改相应的文件。当代码符合eslint的规范时，即可成功编译。
+
+# 别名alias
+
+| 别名   | 对应目录          |
+| ------ | ----------------- |
+| @      | common            |
+| 组件名 | components/组件名 |
+
+创建的组件会实时更新到alias，无需重启即可直接引用。
+
+# 引用
+
+请使用 `import`取代`require`来引入资源。
+
+```javascript
+// common 目录内的js引用
+import util from '@/util'
+
+// 组件demo 的引用
+import 'demo'
+```
+
+## 图片资源
+
+### Html
+
+在HTML页面内，打包编译时，仅打包使用以下形式引用图片的图片资源：
+
+```html
+<!-- 预加载的图片 -->
+<link rel="preload" href="/assets/images/demo.png" as="image">
+<!-- 按文件真实路径引用资源 -->
+<img src="../../assets/images/demo.png">
+<!-- 根据调试服务器静态资源配置引用资源 （新增） -->
+<img src="/assets/images/demo.png">
+
+<!-- 打包编译后： -->
+<link rel="preload" href="http://img.dev.cn/images/demo.png" as="image">
+<img src="http://img.dev.cn/images/demo.png">
+<img src="http://img.dev.cn/images/demo.png">
+```
+
+### Css
+
+在样式文件(scss)内，图片应按文件真实路径来引用资源。
+
+
+
 ## mpd.config.js
 
-项目配置说明
+项目的配置。
+
+该配置信息改动后，需要重新运行调试服务器才可生效。
 
 ```javascript
 module.exports = {
@@ -72,10 +123,19 @@ module.exports = {
     /**
      * 所有页面都引入的库
      * @type {Array}
+     * 仅global内支持 字符和对象两种类型
      */
     global:[
         /* 直接填入需要引入库的路径 */
         'https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js',
+        /* 
+        * 或填入对象，可配置:
+        * ishead放置在头部 
+        * islast 放置在所有资源的末尾 
+        * url为引入库路径 
+            e.g:
+            { ishead: true, url: 'https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js' },
+        */
     ],
     /**
      * 指定页面引入库
@@ -115,10 +175,16 @@ module.exports = {
       }
     },
     /**
-     * 设置 dev服务器端口号
+     * 设置 dev服务器端口号 多开时需要手动修改避免重复
      * @type {Number} 默认9000
      */
     port: 9100,
+    
+		/**
+     * 自动刷新监听端口 多开时需要手动修改避免重复
+     * @type {Number}
+     */
+    liveport: 35729,
 
     /**
      * 启用页面自动刷新
@@ -161,9 +227,12 @@ module.exports = {
     output:'dist',
     /**
      * 图片资源的发布路径
-     * @type {String} 默认 ../
+     * @type {Object} 默认 ../
      */
-    publicPath: '../'
+    publicPath: {
+        source: '../',
+        img: '../'
+    }
   }
 }
 ```
@@ -186,3 +255,4 @@ module.exports  =  {
   '/':'index'
 }
 ```
+
