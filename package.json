@@ -1,6 +1,6 @@
 {
   "name": "mpd-cli",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "CLI for mpd",
   "preferGlobal": true,
   "bin": {
@@ -36,6 +36,7 @@
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.3",
     "@babel/runtime": "^7.4.5",
+    "@babel/runtime-corejs3": "^7.6.0",
     "async": "^2.6.2",
     "autoprefixer": "^9.5.1",
     "babel-eslint": "^10.0.1",
@@ -70,11 +71,11 @@
     "koa-router": "^7.4.0",
     "koa-server-http-proxy": "^0.1.0",
     "koa-static": "^5.0.0",
-    "koa-webpack": "^5.2.2",
+    "koa-webpack": "^5.2.4",
     "koa2-cors": "^2.0.6",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "livereload": "^0.7.0",
+    "livereload": "^0.8.0",
     "metalsmith": "^2.3.0",
     "mini-css-extract-plugin": "^0.6.0",
     "node-sass": "^4.12.0",
@@ -89,11 +90,14 @@
     "style-loader": "^0.23.1",
     "stylelint": "^10.1.0",
     "stylelint-order": "^3.0.0",
+    "stylelint-scss": "^3.10.0",
     "stylelint-webpack-plugin": "^0.10.5",
+    "stylelint-z-index-value-constraint": "^1.1.0",
     "url-loader": "^1.1.2",
     "user-home": "^2.0.0",
     "webpack": "^4.30.0",
-    "webpack-dev-middleware": "3.6.0"
+    "webpack-dev-middleware": "3.6.0",
+    "webpack-hot-client": "^4.1.2"
   },
   "devDependencies": {}
 }
