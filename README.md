@@ -9,6 +9,9 @@
 
 ``` bash
 $ npm i -g mpd-cli
+
+# 若本地没有全局安装 eslint，可一起安装
+$ npm i -g mpd-cli eslint
 ```
 
 安装完成后，可以在命令行中运行 `mpd` 命令，看看是否展示出一份可用命令的帮助信息，来验证它是否安装成功。
