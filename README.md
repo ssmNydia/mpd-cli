@@ -22,7 +22,7 @@ $ npm i -g mpd-cli eslint
 
 运行 `mpd init`，按提示完成创建；
 
-进入项目后，执行 `npm i`
+进入项目后，执行 `npm i` (v.1.0.13-1.0.14版本，无需执行)
 
 ``` bash
 $ mpd init
@@ -179,7 +179,7 @@ module.exports = {
     },
     /**
      * 设置 dev服务器端口号 多开时需要手动修改避免重复
-     * @type {Number} 默认9000
+     * @type {Number} 默认9100
      */
     port: 9100,
     
@@ -244,7 +244,7 @@ module.exports = {
 
 可在 `router.js` 中对项目路由进一步配置，来达到同步线上场景的访问路径。
 
-配置后实时生效，无需重启。
+新增配置实时生效，无需重启；编辑配置需要重启。
 
 默认所有页面的可以直接通过 `http://localhost:9100/[name].html ` 路径访问。
 
@@ -252,8 +252,9 @@ module.exports = {
 module.exports  =  {
   /**
    * key : value
-   * key 支持正则匹配
-   * value 可省略 .html后缀
+   * key 写法参考：/ ， /user ， /users/:id ， /users_:id ，/users_p_:id一个可以内变量（:id）仅可出现一次，遇到需要多个变量的情况，请选择写死多余变量来实现
+   * 冒号后即视为变量字段名称 除非使用/隔断
+   * value pages目录内的页面名称，可省略 .html后缀
    */
   '/':'index'
 }
