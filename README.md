@@ -248,6 +248,8 @@ module.exports = {
 
 默认所有页面的可以直接通过 `http://localhost:9100/[name].html ` 路径访问。
 
+**允许携带query参数**
+
 ```javascript
 module.exports  =  {
   /**
