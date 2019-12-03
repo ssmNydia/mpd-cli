@@ -22,7 +22,7 @@ $ npm i -g mpd-cli eslint
 
 运行 `mpd init`，按提示完成创建；
 
-进入项目后，执行 `npm i` (v.1.0.13-1.0.14版本，无需执行)
+进入项目后，执行 `npm i` (v.1.0.13-1.0.16版本，无需执行)
 
 ``` bash
 $ mpd init
