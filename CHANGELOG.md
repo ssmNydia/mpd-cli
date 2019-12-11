@@ -2,6 +2,19 @@
 本文档将从版本v1.0.14开始列出后续的每个版本的主要更改
 有关详细的更改日志，请查看GitHub发布页面：https://github.com/ssmNydia/mpd-cli/releases
 
+## v1.1.0
+
+1.1版本做了以下调整
+
+
+
+新增以下功能：
+
+* 新增stylelint检查
+* 
+
+
+
 # v1.0
 
 ## v1.0.16
