@@ -11,7 +11,8 @@ const args = cli.setup({
     ['-c, --component', '添加组件'],
     ['-r, --rename', '重命名 需要配合 -p 或 -c'],
     ['-f, --force', '强制覆盖'],
-    ['-d, --download', '下载最新模版']
+    ['-d, --download', '下载最新模版'],
+    ['-m, --ism', '添加m版页面或组件']
   ],
   help: [
     '',
