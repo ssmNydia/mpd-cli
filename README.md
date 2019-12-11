@@ -9,9 +9,6 @@
 
 ``` bash
 $ npm i -g mpd-cli
-
-# 若本地没有全局安装 eslint，可一起安装
-$ npm i -g mpd-cli eslint
 ```
 
 安装完成后，可以在命令行中运行 `mpd` 命令，看看是否展示出一份可用命令的帮助信息，来验证它是否安装成功。
@@ -22,11 +19,10 @@ $ npm i -g mpd-cli eslint
 
 运行 `mpd init`，按提示完成创建；
 
-进入项目后，执行 `npm i`
-
 ``` bash
 $ mpd init
 $ cd 刚才填写的项目名称
+# v1.0.13+ 无需再运行该命令
 $ npm i
 ```
 
@@ -36,17 +32,20 @@ $ npm i
 # 使用 -p 添加名为 demo的页面
 $ mpd add -p demo
 
+# 使用 -p 添加名为 demo的M版页面
+$ mpd add -pm demo
+
 # 使用 -c 添加名为 test的组件
 $ mpd add -c test
 
 # 使用 -r 可以对已有页面进行重命名 将index 改为 demo
-$ mpd add -p -r index demo
+$ mpd add -pr index demo
 
 # 使用 -f 可以强制覆盖同名页面
-$ mpd add -p -f index
+$ mpd add -pf index
 
 # 使用 -d 下载最新模版添加页面
-$ mpd add -p -d index
+$ mpd add -pd index
 ```
 
 ### 启动调试服务器，在项目根目录运行
@@ -91,22 +90,27 @@ import 'demo'
 在HTML页面内，打包编译时，仅打包使用以下形式引用图片的图片资源：
 
 ```html
-<!-- 预加载的图片 -->
-<link rel="preload" href="/assets/images/demo.png" as="image">
-<!-- 按文件真实路径引用资源 -->
-<img src="../../assets/images/demo.png">
-<!-- 根据调试服务器静态资源配置引用资源 （新增） -->
-<img src="/assets/images/demo.png">
+<!-- 根据调试服务器静态资源配置引用资源 -->
+<img src="/images/demo.png">
 
 <!-- 打包编译后： -->
-<link rel="preload" href="http://img.dev.cn/images/demo.png" as="image">
-<img src="http://img.dev.cn/images/demo.png">
 <img src="http://img.dev.cn/images/demo.png">
 ```
 
 ### Css
 
 在样式文件(scss)内，图片应按文件真实路径来引用资源。
+
+
+
+### JS
+
+```javascript
+/* 按文件真实路径来引用图片资源 */
+const htm = `<img src="${require('../../assets/images/demo.png')}" />`
+```
+
+
 
 
 
@@ -155,7 +159,7 @@ module.exports = {
     ]
   },
   /*
-  * dev 和 build 拥有一样的可配置项:
+  * dev 和 build 拥有一样的可配置项有:
   * dir, output
    */
   dev:{
@@ -177,6 +181,16 @@ module.exports = {
         }
       }
     },
+    /**
+     * 启用https
+     * @type {String} 默认false
+     */
+    openHttps: true,
+    /**
+     * 是否开启检查模式
+     * @type {Boolean} 默认false
+     */
+    openLint: false,
     /**
      * 设置 dev服务器端口号 多开时需要手动修改避免重复
      * @type {Number} 默认9000
@@ -219,6 +233,11 @@ module.exports = {
      */
     openMinify: false,
     /**
+     * HTML页面是否设置favicon
+     * @type {Boolean} 默认false
+     */
+    favicon: false,
+    /**
      * 项目目录
      * @type {String} 默认根目录无需填写
      */
@@ -242,9 +261,11 @@ module.exports = {
 
 ## router.js
 
+router.js配置的路由仅对本地调试服务器生效，不影响打包编译代码。
+
 可在 `router.js` 中对项目路由进一步配置，来达到同步线上场景的访问路径。
 
-配置后实时生效，无需重启。
+>  **新增实时生效，无需重启；修改需要重启生效。**
 
 默认所有页面的可以直接通过 `http://localhost:9100/[name].html ` 路径访问。
 
@@ -252,8 +273,9 @@ module.exports = {
 module.exports  =  {
   /**
    * key : value
-   * key 支持正则匹配
-   * value 可省略 .html后缀
+   * key 写法参考：/ ， /user ， /users/:id ， /users_:id ，/users_p_:id一个可以内变量（:id）仅可出现一次，遇到需要多个变量的情况，请选择写死多余变量来实现
+   * 冒号后即视为变量字段名称 除非使用/隔断
+   * value pages目录内的页面名称，可省略 .html后缀
    */
   '/':'index'
 }
