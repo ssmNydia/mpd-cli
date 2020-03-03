@@ -1,5 +1,5 @@
 # mpd-cli
-多页面开发脚手架
+一个基于webpack的自动化多页面开发脚手架。
 
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
@@ -13,7 +13,7 @@ $ npm i -g mpd-cli
 
 安装完成后，可以在命令行中运行 `mpd` 命令，看看是否展示出一份可用命令的帮助信息，来验证它是否安装成功。
 
-## 使用说明
+## 使用
 
 ### 创建项目
 
@@ -62,7 +62,19 @@ $ mpd build
 
 当出现编译失败时，请根据错误提示，修改相应的文件。当代码符合eslint的规范时，即可成功编译。
 
-# 别名alias
+## 功能
+
+✅ css 预处理器支持 scss (less是向下兼容)
+
+✅ es6 -> es5
+
+✅ eslint 遵循规则 standard
+
+✅ stylelint  遵循规则 standard
+
+
+
+## 别名alias
 
 | 别名   | 对应目录          |
 | ------ | ----------------- |
@@ -71,7 +83,9 @@ $ mpd build
 
 创建的组件会实时更新到alias，无需重启即可直接引用。
 
-# 引用
+
+
+## 引用
 
 请使用 `import`取代`require`来引入资源。
 
