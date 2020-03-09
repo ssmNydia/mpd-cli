@@ -1,6 +1,7 @@
 {
   "plugins": [
-    "stylelint-order"
+    "stylelint-order",
+    "stylelint-scss"
   ],
   "rules": {
     "order/order": [
@@ -300,7 +301,7 @@
       "hyphens",
       "pointer-events"
     ],
-    "at-rule-no-unknown": true,
+    "at-rule-no-unknown": false,
     "block-no-empty": true,
     "color-no-invalid-hex": true,
     "comment-no-empty": true,
