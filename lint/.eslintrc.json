@@ -25,7 +25,10 @@
     "jsdoc/require-returns-description": 1,
     "jsdoc/require-returns-type": 1,
     "jsdoc/valid-types": 1,
-    "no-var": 2
+    "no-var": 2,
+    "no-console": 1
   },
-  "parser":"babel-eslint"
+  "parserOptions": {
+    "parser": "babel-eslint"
+  }
 }

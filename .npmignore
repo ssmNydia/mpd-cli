@@ -1,1 +1,9 @@
+# 开发中的目录
+*_coding
+*_coding.*
+# 备份文件
+*.bak.*
+test
+
+# node_modules
 node_modules
