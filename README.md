@@ -1,11 +1,16 @@
 # mpd-cli
-多页面开发脚手架
+一个基于webpack的多页面开发脚手架。
 
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
+
 ## 安装
-请确认系统环境符合以下标准：Node.js 8.x+, npm 5.8.0+
+请确认系统环境符合以下标准：
+
+v1.1.3以下版本： Node.js 8.x+, npm 5.8.0+；
+
+v1.1.3+  版本需： Node.js 10.19.0+, npm 6.13.4+
 
 ``` bash
 $ npm i -g mpd-cli
@@ -13,7 +18,7 @@ $ npm i -g mpd-cli
 
 安装完成后，可以在命令行中运行 `mpd` 命令，看看是否展示出一份可用命令的帮助信息，来验证它是否安装成功。
 
-## 使用说明
+## 使用
 
 ### 创建项目
 
@@ -22,7 +27,8 @@ $ npm i -g mpd-cli
 ``` bash
 $ mpd init
 $ cd 刚才填写的项目名称
-# v1.0.13+ 无需再运行该命令
+
+# v1.0.13+ 无需再运行安装命令
 $ npm i
 ```
 
@@ -41,7 +47,7 @@ $ mpd add -c test
 # 使用 -r 可以对已有页面进行重命名 将index 改为 demo
 $ mpd add -pr index demo
 
-# 使用 -f 可以强制覆盖同名页面
+# 使用 -f 可以强制覆盖同名页面，注意覆盖后，原同名文件的内容都将丢失。请谨慎使用。
 $ mpd add -pf index
 
 # 使用 -d 下载最新模版添加页面
@@ -62,7 +68,19 @@ $ mpd build
 
 当出现编译失败时，请根据错误提示，修改相应的文件。当代码符合eslint的规范时，即可成功编译。
 
-# 别名alias
+## 功能
+
+✅ css 预处理器支持 scss (未来2.0beta版会取消对less的支持，请直接使用scss)
+
+✅ es6 -> es5
+
+✅ eslint 遵循规则 standard
+
+✅ stylelint  遵循规则 standard
+
+
+
+## 别名alias
 
 | 别名   | 对应目录          |
 | ------ | ----------------- |
@@ -71,7 +89,22 @@ $ mpd build
 
 创建的组件会实时更新到alias，无需重启即可直接引用。
 
-# 引用
+
+
+## 项目目录介绍
+
+请勿在项目的开发目录内随意添加目录
+
+```
+|--assets 静态资源目录（iconfont目录请放在此）
+|--common 公共目录 
+|--components 组件目录
+|--pages 页面目录
+```
+
+
+
+## 引用
 
 请使用 `import`取代`require`来引入资源。
 
@@ -81,15 +114,33 @@ import util from '@/util'
 
 // 组件demo 的引用
 import 'demo'
+
+// 请注意引用位置：
+// 示例：index.js 内
+import '@/common'
+// 请在 页面的scss文件前引用 组件
+import 'demo'
+import './index.scss'
+// 请在 页面scss文件后引用公共目录的文件
+import util from '@/util'
+
 ```
 
-## 图片资源
 
-### Html
 
-在HTML页面内，打包编译时，仅打包使用以下形式引用图片的图片资源：
+## 图片资源的引用
+
+假设config内配置的publicPath 的 source 和 img 的值都为：http://img.dev.cn
+
+
+
+### 1、“/” 指代 “assets”文件夹，仅HTML内的IMG标签可用
+
+示例：
 
 ```html
+<!-- v1.0.10+ 皆支持该用法 -->
+<!-- 以前旧版本中使用 /assets/images 的需要及时更换成 / ；未来2.0beta版本将不在支持该写法 -->
 <!-- 根据调试服务器静态资源配置引用资源 -->
 <img src="/images/demo.png">
 
@@ -97,13 +148,25 @@ import 'demo'
 <img src="http://img.dev.cn/images/demo.png">
 ```
 
-### Css
+### 2、按文件的真实路径引用
 
-在样式文件(scss)内，图片应按文件真实路径来引用资源。
+#### 方法1：require
 
+```
+${require('')}
+```
 
+* HTML
 
-### JS
+```html
+<!-- 内联样式里的图片，注意用require的方式引用图片路径时，路径需按照文件真实路径填写 -->
+<div class="img-box" style="background-image:url(${require(`../../assets/images/img_m.png`)});"></div>
+
+<!-- 打包编译后： -->
+<div class="img-box" style="background-image: url(http://img.dev.cn/images/img_m.png);"></div>
+```
+
+* JS
 
 ```javascript
 /* 按文件真实路径来引用图片资源 */
@@ -112,13 +175,25 @@ const htm = `<img src="${require('../../assets/images/demo.png')}" />`
 
 
 
+#### 方法2: 直接引用
+
+* CSS
+
+```scss
+body {
+  background: url('../../assets/images/demo.png') no-repeat;
+}
+```
+
+
+
 
 
 ## mpd.config.js
 
-项目的配置。
+该项目的mpd-cli配置。
 
-该配置信息改动后，需要重新运行调试服务器才可生效。
+**该配置信息改动后，需要重新运行调试服务器才可生效。**
 
 ```javascript
 module.exports = {
@@ -129,6 +204,7 @@ module.exports = {
   plugins:{
     /**
      * 所有页面都引入的库
+     * 引入的路径若不是以http开头，则在打包时会自动为其添加 publichPath.source 的前缀。
      * @type {Array}
      * 仅global内支持 字符和对象两种类型
      */
@@ -249,11 +325,12 @@ module.exports = {
     output:'dist',
     /**
      * 图片资源的发布路径
-     * @type {Object} 默认 ../
+     * 注意填写的路径末尾避免使用 '/'
+     * @type {Object} 默认 为空
      */
     publicPath: {
-        source: '../',
-        img: '../'
+        source: '',
+        img: ''
     }
   }
 }
@@ -261,25 +338,28 @@ module.exports = {
 
 ## router.js
 
-router.js配置的路由仅对本地调试服务器生效，不影响打包编译代码。
+router.js配置的路由仅对本地调试服务器生效，不影响打包编译代码。该功能是为了方便保持与线上场景的访问路径一致，避免上线前重新更改路径。
 
 可在 `router.js` 中对项目路由进一步配置，来达到同步线上场景的访问路径。
 
->  **新增实时生效，无需重启；修改需要重启生效。**
+>  **router.js内容变更后实时生效，无需重启**
 
-默认所有页面的可以直接通过 `http://localhost:9100/[name].html ` 路径访问。
+默认所有页面的可以直接通过 `http://localhost:9100/[name].html `  和 ``` http://localhost:9100/[name]```路径访问。
 
 **允许携带query参数**
+
+**配置路由时，应注意避免配置 “/” 和 “/c” 两个路径**
 
 ```javascript
 module.exports  =  {
   /**
    * key : value
-   * key 写法参考：/ ， /user ， /users/:id ， /users_:id ，/users_p_:id一个可以内变量（:id）仅可出现一次，遇到需要多个变量的情况，请选择写死多余变量来实现
-   * 冒号后即视为变量字段名称 除非使用/隔断
-   * value pages目录内的页面名称，可省略 .html后缀
+   * key 写法参考：/ ， /user ， /users/:id ， /users_:id ，/users_p_:id
+   * 变量（:id）仅可出现一次，遇到需要多个变量的情况，请选择写死多余变量来实现
+   * 多个变量需使用/隔断
+   * value pages目录内的页面名称，省略 .html后缀
    */
-  '/':'index'
+  'p': 'page'
 }
 ```
 
