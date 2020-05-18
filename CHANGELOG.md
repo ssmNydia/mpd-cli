@@ -2,6 +2,13 @@
 本文档将从版本v1.0.14开始列出后续的每个版本的主要更改
 有关详细的更改日志，请查看GitHub发布页面：https://github.com/ssmNydia/mpd-cli/releases
 
+# v1.1.4
+
+**修复**
+
+* 修复 @babel/runtime-corejs3 丢失
+
+
 # v1.1.3
 
 **优化&修复：**
