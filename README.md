@@ -213,8 +213,9 @@ module.exports = {
         'https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js',
         /* 
         * 或填入对象，可配置:
-        * ishead放置在头部 
-        * islast 放置在所有资源的末尾 
+        * ishead 放置在头部；默认false
+        * islast 放置在所有资源的末尾，通常用于添加统计类资源；默认false
+        * ignore 为true时，打包默认不引入该路径；默认false
         * url为引入库路径 
             e.g:
             { ishead: true, url: 'https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js' },
