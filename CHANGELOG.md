@@ -2,6 +2,12 @@
 本文档将从版本v1.0.14开始列出后续的每个版本的主要更改
 有关详细的更改日志，请查看GitHub发布页面：https://github.com/ssmNydia/mpd-cli/releases
 
+# v1.1.7
+
+**新增**
+
+* 全局引入配置新增字段 islast 和 ignore
+
 # v1.1.6
 
 **修复**
