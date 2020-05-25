@@ -2,6 +2,14 @@
 本文档将从版本v1.0.14开始列出后续的每个版本的主要更改
 有关详细的更改日志，请查看GitHub发布页面：https://github.com/ssmNydia/mpd-cli/releases
 
+# v1.1.7
+
+**新增**
+
+* 全局引入配置新增字段 islast 和 ignore
+* 支持在mpd.config.js内配置是否兼容IE8，要开启兼容IE8，必须开启useUglify。默认开启。 ` ie8: true `
+* 支持在mpd.config.js内配置是否启用uglify，若关闭uglify，则ie8也将关闭。默认开启。 ` useUglify: true `
+
 # v1.1.6
 
 **修复**

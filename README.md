@@ -204,7 +204,7 @@ module.exports = {
   plugins:{
     /**
      * 所有页面都引入的库
-     * 引入的路径若不是以http开头，则在打包时会自动为其添加 publichPath.source 的前缀。
+     * 引入的路径若不是以"http"或"//"开头，则在打包时会自动为其添加 publichPath.source 的前缀。
      * @type {Array}
      * 仅global内支持 字符和对象两种类型
      */
@@ -213,8 +213,9 @@ module.exports = {
         'https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js',
         /* 
         * 或填入对象，可配置:
-        * ishead放置在头部 
-        * islast 放置在所有资源的末尾 
+        * ishead 放置在头部；默认false
+        * islast 放置在所有资源的末尾，通常用于添加统计类资源；默认false
+        * ignore 为true时，打包默认不引入该路径；默认false
         * url为引入库路径 
             e.g:
             { ishead: true, url: 'https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js' },
