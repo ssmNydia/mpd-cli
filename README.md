@@ -204,7 +204,7 @@ module.exports = {
   plugins:{
     /**
      * 所有页面都引入的库
-     * 引入的路径若不是以http开头，则在打包时会自动为其添加 publichPath.source 的前缀。
+     * 引入的路径若不是以"http"或"//"开头，则在打包时会自动为其添加 publichPath.source 的前缀。
      * @type {Array}
      * 仅global内支持 字符和对象两种类型
      */
