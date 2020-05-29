@@ -1,6 +1,6 @@
 {
   "name": "mpd-cli",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "一个基于webpack的自动化多页面开发脚手架。自动生成页面入口，快捷添加页面和组件，支持新增组件实时更新无需重启服务，支持本地开启https，支持多开mpd项目，允许局域网内其他用户访问。",
   "preferGlobal": true,
   "bin": {
@@ -39,6 +39,8 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "~7.8.7",
     "@babel/register": "^7.8.6",
+    "@babel/runtime": "^7.8.7",
+    "@babel/runtime-corejs3": "^7.8.7",
     "async": "^2.6.2",
     "autoprefixer": "^9.5.1",
     "babel-eslint": "^10.0.1",
@@ -50,6 +52,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "core-js": "^3.6.4",
     "css-loader": "^2.1.1",
+    "css-x2x-loader": "^0.1.2",
     "cssnano": "^4.1.10",
     "download-git-repo": "^1.1.0",
     "eslint": "^5.16.0",
@@ -96,6 +99,7 @@
     "style-loader": "^0.23.1",
     "stylelint": "^8.4.0",
     "stylelint-config-sass-guidelines": "^7.0.0",
+    "stylelint-config-standard": "^19.0.0",
     "stylelint-order": "^3.1.1",
     "stylelint-scss": "^3.14.2",
     "stylelint-webpack-plugin": "^0.10.5",
@@ -104,10 +108,7 @@
     "user-home": "^2.0.0",
     "webpack": "^4.30.0",
     "webpack-dev-middleware": "3.6.0",
-    "webpack-hot-client": "^4.1.2",
-    "stylelint-config-standard": "^19.0.0",
-    "@babel/runtime": "^7.8.7",
-    "@babel/runtime-corejs3": "^7.8.7"
+    "webpack-hot-client": "^4.1.2"
   },
   "devDependencies": {
     "ava": "^3.5.0",

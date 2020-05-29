@@ -2,6 +2,17 @@
 本文档将从版本v1.0.14开始列出后续的每个版本的主要更改
 有关详细的更改日志，请查看GitHub发布页面：https://github.com/ssmNydia/mpd-cli/releases
 
+# v1.1.8 (2020-05-29)
+
+**新增&修复**
+
+* `A` 新增 mpd.config.js 的配置 字段 imgBase64 ，图片大小在指定b内编译成base64格式，默认开启且值为 1024。设置false时，图片将不编译成base64格式。
+* `A` 新增 mpd.config.js 的配置字段 debug，用于控制打包时是否去掉console信息；默认false，去掉。
+* `A` 新增 秘密功能。^_^
+* `U` 更新 打包文件时，assets目录内 以`_` 开头命名的目录将被忽略，不再拷贝到打包目录。
+* `F` 修复已知的bug
+
+
 # v1.1.7
 
 **新增**
