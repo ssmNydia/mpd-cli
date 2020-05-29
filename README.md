@@ -96,8 +96,8 @@ $ mpd build
 请勿在项目的开发目录内随意添加目录
 
 ```
-|--assets 静态资源目录（iconfont目录请放在此）
-|--common 公共目录 
+|--assets 静态资源目录（iconfont目录请放在此，css样式文件允许除下面3个目录外，还可放在assets内）
+|--common 公共目录 （less、scss样式文件，仅可放在 common,components,pages三个目录内)
 |--components 组件目录
 |--pages 页面目录
 ```
@@ -290,7 +290,27 @@ module.exports = {
      * dev服务器启动自动打开页面
      * @type {Boolean} 默认false
      */
-    autoopen: true
+    autoopen: true,
+    /**
+     * 启用uglify
+     * @type {Boolean} 默认 true
+     */
+    useUglify: true,
+    /**
+     * 兼容ie8，开启ie8兼容，就必须开启uglify，否则无法生效
+     * @type {Boolean} 默认 true
+     */
+    ie8: true,
+    /**
+     * 图片在指定b内的编译成base64格式
+     * @type {Number|Boolean} false时不编译base64
+     */
+    imgBase64: 1024,
+    /**
+     * 是否保留console信息
+     * @type {Boolean} 默认 true。dev模式下默认开启
+     */
+    debug: true
   },
 
   build:{
@@ -332,7 +352,27 @@ module.exports = {
     publicPath: {
         source: '',
         img: ''
-    }
+    },
+    /**
+     * 启用uglify
+     * @type {Boolean} 默认 true
+     */
+    useUglify: true,
+    /**
+     * 兼容ie8，开启ie8兼容，就必须开启uglify，否则无法生效
+     * @type {Boolean} 默认 true
+     */
+    ie8: true,
+    /**
+     * 图片在指定b内的编译成base64格式
+     * @type {Number|Boolean} false时不编译base64
+     */
+    imgBase64: 1024,
+    /**
+     * 是否保留console信息
+     * @type {Boolean} 默认 false
+     */
+    debug: false
   }
 }
 ```
@@ -347,7 +387,7 @@ router.js配置的路由仅对本地调试服务器生效，不影响打包编�
 
 默认所有页面的可以直接通过 `http://localhost:9100/[name].html `  和 ``` http://localhost:9100/[name]```路径访问。
 
-**允许携带query参数**
+**访问路由时，允许携带query参数。(不需在router.js配置query信息)**
 
 **配置路由时，应注意避免配置 “/” 和 “/c” 两个路径**
 
@@ -360,7 +400,7 @@ module.exports  =  {
    * 多个变量需使用/隔断
    * value pages目录内的页面名称，省略 .html后缀
    */
-  'p': 'page'
+  '/p': 'page'
 }
 ```
 
