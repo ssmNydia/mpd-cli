@@ -1,6 +1,6 @@
 {
   "name": "mpd-cli",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "一个基于webpack的自动化多页面开发脚手架。自动生成页面入口，快捷添加页面和组件，支持新增组件实时更新无需重启服务，支持本地开启https，支持多开mpd项目，允许局域网内其他用户访问。",
   "preferGlobal": true,
   "bin": {
