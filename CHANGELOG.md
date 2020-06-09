@@ -2,6 +2,13 @@
 本文档将从版本v1.0.14开始列出后续的每个版本的主要更改
 有关详细的更改日志，请查看GitHub发布页面：https://github.com/ssmNydia/mpd-cli/releases
 
+# v1.1.11 (2020-06-09)
+
+**修复**
+
+* `F` m版meta增加 viewport-fit=cover 兼容全面屏
+
+
 # v1.1.10 (2020-06-02)
 
 **修复**
